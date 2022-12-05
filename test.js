@@ -8,17 +8,16 @@ const statistics_url = 'https://finance.yahoo.com/quote/BBY/key-statistics?p=BBY
 const insider_url = 'https://finance.yahoo.com/quote/BBY/insider-transactions?p=BBY';
 const dividendGrowthURL = 'https://www.digrin.com/stocks/detail/BBY/';
 
-
 async function scrapeDividend(url) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    const navigationPromise = page.waitForNavigation({waitUntil: "domcontentloaded"});
+    // const navigationPromise = page.waitForNavigation({waitUntil: "domcontentloaded"});
     await page.goto(url);
     
-    await navigationPromise;
+    // await navigationPromise;
     await page.waitForXPath('/html/body/div[1]/div[2]/div[2]/p[24]/span/strong');
 
-    await navigationPromise;
+    // await navigationPromise;
     const [el] = await page.$x('/html/body/div[1]/div[2]/div[2]/p[24]/span/strong');
 
     const txt = await el.getProperty('textContent');
@@ -39,4 +38,3 @@ async function scrapeDividend(url) {
         // await browser.close();
     }
  })()
-

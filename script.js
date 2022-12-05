@@ -6,8 +6,6 @@ const puppeteer = require('puppeteer');
 const { stat } = require('fs/promises');
 const { resolve } = require('path');
 
-
-
 let ticker = "";
 
 const scrape = async (browser, url, paths) => {
@@ -15,7 +13,11 @@ const scrape = async (browser, url, paths) => {
     const navigationPromise = page.waitForNavigation({
         waitUntil: "domcontentloaded",
     });
-    await page.goto(url);
+    let status = await page.goto(url);
+    status = status.status();
+    if (status != 404) {
+        console.log(`Probably HTTP response status code 200 OK.`);
+    };
     await page.setDefaultNavigationTimeout(0);
     await navigationPromise;
     return Promise.all(
