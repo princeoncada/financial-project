@@ -44,6 +44,7 @@ app.post('/', function(req, res){
 
 app.get('/object', function(req, res){
     let browser;
+    let divData;
     (async () => {
 
     const financials_url = `https://finance.yahoo.com/quote/${ticker}/financials?p=${ticker}`;
@@ -163,7 +164,7 @@ app.get('/object', function(req, res){
     }
 
     // scraped dividend data as JSON object
-    const divData = {
+    divData = {
         'netIncome': netIncome,
         'operatingCashflow': operatingCashflow,
         'cash': cash,
@@ -175,7 +176,7 @@ app.get('/object', function(req, res){
         'insiderAction': insiderAction
     }
 
-    console.log(divData)
+    // console.log(divData)
 
     res.render('divStats', {
         ticker: ticker,
@@ -187,7 +188,8 @@ app.get('/object', function(req, res){
         divGrowth: divData['divGrowth'],
         divPayoutRatio: divData['divPayoutRatio'],
         returnOnEquity: divData['returnOnEquity'],
-        insiderAction: divData['insiderAction']
+        insiderAction: divData['insiderAction'],
+        divData: JSON.stringify(divData)
     })
  })()
 })
