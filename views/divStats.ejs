@@ -14,10 +14,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr id="netIncome">
+        <tr>
           <th scope="row">Net Income</th>
           <% netIncome.forEach(function(e){ %>
-          <td><%= e['netIncome'].toLocaleString() %></td>
+          <td class="netIncome"><%= e['netIncome'].toLocaleString() %></td>
           <% }) %>
         </tr>
 
@@ -62,6 +62,7 @@
       Return on Equity: <%= (returnOnEquity*100).toFixed(2) + '%' %>
     </div>
 
+    <!-- div tag containing JSON dividend data for check.js to use and access -->
     <div id="divData" class="invisible position-absolute">
       <%= divData %> 
     </div>

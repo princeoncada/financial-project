@@ -33,3 +33,5 @@ if (returnOnEquity >= 0.15) {
 } else {
   $("#divROE").addClass("alert-danger");
 }
+
+console.log($('.netIncome').get(0).textContent);
